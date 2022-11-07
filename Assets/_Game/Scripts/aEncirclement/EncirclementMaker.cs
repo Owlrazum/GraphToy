@@ -109,9 +109,8 @@ public class EncirclementMaker : MonoBehaviour
         Vector3 localPos = new Vector3(Mathf.Cos(rndAngle), 0, Mathf.Sin(rndAngle)) * rndRadius;
         Vector3 worldPos = current.Pos + localPos;
 
-        GameObject gb = Instantiate(nodePrefab, worldPos, Quaternion.identity);
-        Node node = gb.GetComponent<Node>();
-        sector.OccupyingNode = node;
+        GameObject node = Instantiate(nodePrefab, worldPos, Quaternion.identity);
+        sector.OccupyingNode = node.transform;
     }
 
 

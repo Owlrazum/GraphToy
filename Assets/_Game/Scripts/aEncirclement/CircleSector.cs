@@ -120,8 +120,8 @@ public class CircleSector
 
     public OccupatorOfSectors OwnerLord { get; set; }
 
-    private Node occupyingNode;
-    public Node OccupyingNode
+    private Transform occupyingNode;
+    public Transform OccupyingNode
     {
         get { return occupyingNode; }
         set { occupyingNode = value; }

@@ -62,8 +62,8 @@ public class Encirclement
             for (int i = 0; i < nodeColliders.Length; i++)
             {
                 Border border = nodeColliders[i].GetComponent<Border>();
-                float startAngle = ComputeNodeAngle(border.PrimaryStart.OccupyingNode);
-                float endAngle = ComputeNodeAngle(border.PrimaryEnd.OccupyingNode);
+                float startAngle = ComputeNodeAngle(border.PrimaryStart.OccupyingNode.transform);
+                float endAngle = ComputeNodeAngle(border.PrimaryEnd.OccupyingNode.transform);
                 bordersAngles.Add((startAngle, endAngle, border));
             }
             bordersAngles.Sort(CompareByDistance);
@@ -83,7 +83,7 @@ public class Encirclement
     }
 
 
-    public float ComputeNodeAngle(Node node)
+    public float ComputeNodeAngle(Transform node)
     {
         Vector3 localNodePos = node.transform.position - Pos;
         Vector3 fromVector = Vector3.right;
@@ -100,11 +100,11 @@ public class Encirclement
     {
         Vector3 borderStart = b1.border.PrimaryStart.OccupyingNode.transform.position;
         Vector3 borderEnd = b1.border.PrimaryEnd.OccupyingNode.transform.position;
-        float distFirst = CustomMath.GetPointLineSegmentDistance(Pos, borderStart, borderEnd);
+        float distFirst = GetPointLineSegmentDistance(Pos, borderStart, borderEnd);
 
         borderStart = b2.border.PrimaryStart.OccupyingNode.transform.position;
         borderEnd = b2.border.PrimaryEnd.OccupyingNode.transform.position;
-        float distSecond = CustomMath.GetPointLineSegmentDistance(Pos, borderStart, borderEnd);
+        float distSecond = GetPointLineSegmentDistance(Pos, borderStart, borderEnd);
 
         return distFirst.CompareTo(distSecond);
     }
@@ -452,5 +452,10 @@ public class Encirclement
     public void UpdatePos(Vector3 pos)
     {
         Pos = pos;
+    }
+
+    private float GetPointLineSegmentDistance(Vector3 p0, Vector3 p1, Vector3 p2)
+    {
+        return Vector3.Cross((p0 - p1), (p0 - p2)).magnitude / (p2 - p1).magnitude;
     }
 }

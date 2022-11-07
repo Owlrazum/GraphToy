@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RopeNamespace;
+
+using Orazum.Math;
 
 public class Rope
 {
@@ -12,78 +13,84 @@ public class Rope
     /// Additionally, Node Connection should happen in relation to the ones already included in the rope;
     /// </summary>
 
-    public Node start { get; private set; }
-    public Node end { get; private set; }
+    public Node Start { get; private set; }
+    public Node End { get; private set; }
 
-    public ClockOrderEnum ClockOrder { get; private set; }
-    public int nodeCount { get; private set; }
+    public ClockOrderType ClockOrder { get; private set; }
+    public bool IsClockOrderValid { get; private set; }
+    public int NodeCount { get; private set; }
 
     public Rope(Node start, Node end)
     {
-        this.start = start;
-        this.end = end;
-        this.start.Connect(this.end, RopeTail.End);
-        ClockOrder = ClockOrderEnum.None;
-        nodeCount = 0;
+        this.Start = start;
+        this.End = end;
+        this.Start.Connect(this.End, RopeTail.End);
+        NodeCount = 0;
     }
 
     public void ToStart(Node node)
     {
         ProcessNodeAddition(node);
-        start.Connect(node, RopeTail.Start);
-        start = node;
+        Start.Connect(node, RopeTail.Start);
+        Start = node;
     }
 
     public void ToEnd(Node node)
     {
         ProcessNodeAddition(node);
-        end.Connect(node, RopeTail.End);
-        end = node;
+        End.Connect(node, RopeTail.End);
+        End = node;
     }
 
     private void ProcessNodeAddition(Node node)
     {
-        nodeCount++;
-        if (nodeCount == 3) 
+        NodeCount++;
+        if (NodeCount == 3) 
         {
-            Node first = start;
+            Node first = Start;
             Node second = first.ConnectedTo;
             Node third = second.ConnectedTo;
-            Vector3 lhs = start.transform.position - second.transform.position;
+            Vector3 lhs = Start.transform.position - second.transform.position;
             Vector3 rhs = second.transform.position - third.transform.position;
             float CrossProdSign = Mathf.Sign(Vector3.Cross(lhs, rhs).y);
-            ClockOrder = EnumConverter.ConvertSignToClockOrder(CrossProdSign);
+            ClockOrder = MathUtilities.ConvertSignToClockOrder(CrossProdSign);
         }
+    }
+
+    public void AssignClockOrder(ClockOrderType clockOrder)
+    {
+        ClockOrder = clockOrder;
+        IsClockOrderValid = true;
     }
 
     public void FromStart()
     {
-        ProcessNodeSubstraction(start);
-        Node newStart = start.ConnectedTo;
-        start.Disconnect(RopeTail.Start);
-        start = newStart;
+        ProcessNodeSubstraction(Start);
+        Node newStart = Start.ConnectedTo;
+        Start.Disconnect(RopeTail.Start);
+        Start = newStart;
     }
 
     public void FromEnd()
     {
-        ProcessNodeSubstraction(end);
-        Node newEnd = end.ConnectedFrom;
-        end.Disconnect(RopeTail.End);
-        end = newEnd;
+        ProcessNodeSubstraction(End);
+        Node newEnd = End.ConnectedFrom;
+        End.Disconnect(RopeTail.End);
+        End = newEnd;
     }
 
     private void ProcessNodeSubstraction(Node node)
     {
-        nodeCount--;
-        if (nodeCount == 2)
+        NodeCount--;
+        if (NodeCount == 2)
         {
-            ClockOrder = ClockOrderEnum.None;
+            IsClockOrderValid = false;
         }
     }
 
     public bool CheckIsNodeSameClockOrder(Node node, RopeTail ropeTail)
     {
-        if (ClockOrder == ClockOrderEnum.None)
+        if (!IsClockOrderValid)
         {
             Debug.LogError("No ClockOrder for this rope!");
             return false;
@@ -92,19 +99,19 @@ public class Rope
         if (ropeTail == RopeTail.Start)
         {
             first  = node.transform.position;
-            second = start.transform.position;
-            third  = start.ConnectedTo.transform.position;
+            second = Start.transform.position;
+            third  = Start.ConnectedTo.transform.position;
         }
         else
         {
-            first  = end.ConnectedFrom.transform.position;
-            second = end.transform.position;
+            first  = End.ConnectedFrom.transform.position;
+            second = End.transform.position;
             third = node.transform.position;
         }
         Vector3 firstVec = second - first;
         Vector3 secondVec = third - second;
         float checkSign = Mathf.Sign(Vector3.Cross(firstVec, secondVec).y);
-        ClockOrderEnum checkClockOrder = EnumConverter.ConvertSignToClockOrder(checkSign); 
+        ClockOrderType checkClockOrder = MathUtilities.ConvertSignToClockOrder(checkSign); 
         return checkClockOrder == ClockOrder;
     }
 }

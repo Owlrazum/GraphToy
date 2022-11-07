@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum RopeTail
@@ -11,15 +9,6 @@ public enum RopeTail
 
 public class Node : MonoBehaviour
 {
-    /// <summary>
-    /// In Encirclements serves as a gameobject with name without any methods.
-    /// 
-    /// In Ropes serves as a whole class.
-    /// 
-    /// Node Connection/Disconnection happens in relative to those already included in the rope
-    /// (may not be true to change in case of additional types of structures)
-    /// </summary>
-
     [SerializeField]
     GameObject linePrefab;
 

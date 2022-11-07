@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RopeNamespace;
+
+using Orazum.Math;
 
 public class WebOfRopesMaker : MonoBehaviour
 {
@@ -143,7 +144,7 @@ public class WebOfRopesMaker : MonoBehaviour
                     //TODO: probability of trapping;
                     continue;
                 }
-                if (IsTooSmallDistanceFromPlayer(rndNode, rndRope.end))
+                if (IsTooSmallDistanceFromPlayer(rndNode, rndRope.End))
                 {
                     continue;
                 }
@@ -179,17 +180,17 @@ public class WebOfRopesMaker : MonoBehaviour
 
         if (r1.ClockOrder == r2.ClockOrder)
         {
-            if (IsNodeHelpTrapPlayer(r2.start, r1))
+            if (IsNodeHelpTrapPlayer(r2.Start, r1))
             {
-                if (!IsTooSmallDistanceFromPlayer(r1.end, r2.start))
+                if (!IsTooSmallDistanceFromPlayer(r1.End, r2.Start))
                 {
                     //return new RopesJoin((r1.end, r2.start));
                 }
             }
 
-            if (IsNodeHelpTrapPlayer(r1.start, r2))
+            if (IsNodeHelpTrapPlayer(r1.Start, r2))
             {
-                if (!IsTooSmallDistanceFromPlayer(r1.start, r2.end))
+                if (!IsTooSmallDistanceFromPlayer(r1.Start, r2.End))
                 {
                     //return (r1.start, r2.end);
                 }
@@ -212,20 +213,21 @@ public class WebOfRopesMaker : MonoBehaviour
     /// <returns></returns>
     private bool IsNodeHelpTrapPlayer(Node node, Rope rope)
     {
-        Vector3 nodeVector = node.transform.position - rope.end.transform.position;
+        Vector3 nodeVector = node.transform.position - rope.End.transform.position;
         Vector3 playerVector = playerTransform.position - node.transform.position;
-        float crossProdSign = CustomMath.GetCrossProdSign(nodeVector, playerVector);
-        ClockOrderEnum checkClockOrder = EnumConverter.ConvertSignToClockOrder(crossProdSign);
-        ClockOrderEnum ropeClockOrder = rope.ClockOrder;
-        if (rope.ClockOrder == ClockOrderEnum.None)
+        float crossProdSign = MathUtilities.GetCrossProdSign(nodeVector, playerVector);
+        ClockOrderType checkClockOrder = MathUtilities.ConvertSignToClockOrder(crossProdSign);
+        ClockOrderType ropeClockOrder = rope.ClockOrder;
+        if (!rope.IsClockOrderValid)
         {
-            Vector3 ropeVector = rope.end.transform.position - rope.end.ConnectedFrom.transform.position;
+            Vector3 ropeVector = rope.End.transform.position - rope.End.ConnectedFrom.transform.position;
             crossProdSign = Mathf.Sign(Vector3.Cross(ropeVector, nodeVector).y);
-            ropeClockOrder = EnumConverter.ConvertSignToClockOrder(crossProdSign); // not real
+            ropeClockOrder = MathUtilities.ConvertSignToClockOrder(crossProdSign); // not real
+            rope.AssignClockOrder(ropeClockOrder);
         }
         if (checkClockOrder == ropeClockOrder)
         {
-            string log = checkClockOrder + " " + ropeClockOrder + " " + rope.end.Index + " " + node.Index;
+            string log = checkClockOrder + " " + ropeClockOrder + " " + rope.End.Index + " " + node.Index;
             //            Debug.Log(log);
             return true;
         }
@@ -237,7 +239,7 @@ public class WebOfRopesMaker : MonoBehaviour
         Vector3 p0 = playerTransform.position;
         Vector3 p1 = n1.transform.position;
         Vector3 p2 = n2.transform.position;
-        float dist = CustomMath.GetPointLineSegmentDistance(p0, p1, p2);
+        float dist = MathUtilities.GetPointLineSegmentDistance(p0, p1, p2);
         if (dist < desiredMinDistanceFromPlayer)
         {
             return true;
@@ -264,6 +266,4 @@ public class WebOfRopesMaker : MonoBehaviour
         ropes[startIndex] = result;
         return result;
     }
-
-
 }
