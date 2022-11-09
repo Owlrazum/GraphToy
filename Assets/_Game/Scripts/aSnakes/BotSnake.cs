@@ -38,10 +38,10 @@ public class BotSnake : MonoBehaviour
     [SerializeField]
     private Rig rigToDisable;
 
-    private MoveMobile movement;
+    private PlayerMovement movement;
     private void Start()
     {
-        movement = GetComponent<MoveMobile>();
+        movement = GetComponent<PlayerMovement>();
         StartCoroutine(DirectionSetting());
         StartCoroutine(DirectionChanging());
     }
@@ -89,7 +89,7 @@ public class BotSnake : MonoBehaviour
             {
                 LerpParam += rateOfRotation * Time.deltaTime;
                 currentDirection = Vector3.Lerp(currentDirection, targetDirection, LerpParam);
-                movement.UpdateMoveControl(currentDirection);
+                movement.UpdateDirection(currentDirection);
                 //Debug.Log(currentDirection);
             }
             yield return null;

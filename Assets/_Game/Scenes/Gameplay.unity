@@ -497,12 +497,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -6669454375361062612, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
+      propertyPath: _nodePrefab
+      value: 
+      objectReference: {fileID: 608641073391533994, guid: a2acdfe7069374c109414f4b874cf754, type: 3}
+    - target: {fileID: -6669454375361062612, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
+      propertyPath: _nodeSpawnRate
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -6669454375361062612, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 811029300}
     - target: {fileID: -6669454375361062612, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
       propertyPath: radiusOfSpawnArea
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -6669454375361062612, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
+      propertyPath: _radiusOfSpawnArea
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -6669454375361062612, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
+      propertyPath: timeUntilNextSpawn
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 807649063010918204, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
       propertyPath: m_Name
@@ -552,6 +568,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5812448858243461522, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
+      propertyPath: _edgePrefab
+      value: 
+      objectReference: {fileID: 2112792180, guid: 7def87105979d40d08d9c591685334d2, type: 3}
+    - target: {fileID: 5812448858243461522, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
+      propertyPath: _nodePrefab
+      value: 
+      objectReference: {fileID: 608641073391533993, guid: a2acdfe7069374c109414f4b874cf754, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 223db0e7ae68d4f9a97f932170858930, type: 3}
 --- !u!1001 &453480840
@@ -562,9 +586,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1804488531, guid: 1b2cce751711b4630b61ad0dc8d35190, type: 3}
-      propertyPath: joystick
+      propertyPath: _joystick
       value: 
       objectReference: {fileID: 1458482872}
+    - target: {fileID: 1804488532, guid: 1b2cce751711b4630b61ad0dc8d35190, type: 3}
+      propertyPath: _rotationSpeedDeg
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 1651982326006142002, guid: 1b2cce751711b4630b61ad0dc8d35190, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -887,6 +915,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 808345935}
     m_Modifications:
+    - target: {fileID: 2929252283123773937, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773937, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773937, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -986,6 +1026,18 @@ PrefabInstance:
     - target: {fileID: 2929252285020697096, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252285020698103, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252285020698103, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252285020698103, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}

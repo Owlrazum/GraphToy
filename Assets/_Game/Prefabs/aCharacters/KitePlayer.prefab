@@ -721,6 +721,7 @@ GameObject:
   - component: {fileID: 1804488532}
   - component: {fileID: 1492427326}
   - component: {fileID: 1492427327}
+  - component: {fileID: 5918024910624044830}
   m_Layer: 3
   m_Name: KitePlayer
   m_TagString: Untagged
@@ -819,9 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1936bec00098473487da7ce7687cc59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
-  bumpRecoveryTime: 0
-  playerSpace: {fileID: 1651982326006142002}
+  _joystick: {fileID: 0}
 --- !u!114 &1804488532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,9 +833,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec41945d999ee4aa3b411a46e57ed615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  fallSpeed: 0
-  playerSpace: {fileID: 1651982326006142002}
+  _moveSpeed: 10
+  _rotationSpeedDeg: 90
 --- !u!54 &1492427326
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -865,6 +863,24 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!143 &5918024910624044830
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143502279043690365}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4183278549641411688
 GameObject:

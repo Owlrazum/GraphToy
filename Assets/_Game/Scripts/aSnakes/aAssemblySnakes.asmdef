@@ -1,8 +1,9 @@
 {
-    "name": "aAssemblyWebOfRopes",
+    "name": "aAssemblySnakes",
     "rootNamespace": "",
     "references": [
-        "GUID:569ac694a57e7430b937f95877b6c3be"
+        "GUID:bb1b53a6f472c45908995d22fc4747fa",
+        "GUID:7f7d1af65c2641843945d409d28f2e20"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

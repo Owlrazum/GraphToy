@@ -1,54 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetachedNodesList
+public static class ListExtensions
 {
-    List<int> nodes;
-
-    public DetachedNodesList()
+    public static (Node, Node) GetTwoRandom(this List<Node> list)
     {
-        nodes = new List<int>();
-    }
-
-    public void RemoveNode(Node node)
-    {
-        nodes.Remove(node.Index);
-    }
-
-    public void AddNode(Node node)
-    {
-        nodes.Add(node.Index);
-    }
-
-    public int GetCount()
-    {
-        return nodes.Count;
-    }
-
-    public (int, int) GetTwoRandomNodes()
-    {
-        if (nodes.Count < 2)
+        if (list.Count < 2)
         {
             Debug.LogError("There are no two detached nodes!");
-            return (-1, -1);
+            return (null, null);
         }
-        if (nodes.Count == 2)
+        if (list.Count == 2)
         {
-            return (nodes[0], nodes[1]);
+            return (list[0], list[1]);
         }
             
-        int first, second;
+        Node first, second;
 
-        int rnd = Random.Range(2, nodes.Count);
-        first = nodes[rnd];
-        nodes[rnd] = nodes[0];
-        nodes[0] = first;
+        int rnd = Random.Range(2, list.Count);
+        first = list[rnd];
+        list[rnd] = list[0];
+        list[0] = first;
 
-        rnd = Random.Range(2, nodes.Count);
-        second = nodes[rnd];
-        nodes[rnd] = nodes[0];
-        nodes[0] = second;
+        rnd = Random.Range(2, list.Count);
+        second = list[rnd];
+        list[rnd] = list[0];
+        list[0] = second;
 
         return (first, second);
     }
@@ -60,7 +37,7 @@ public class DetachedNodesList
     /// </summary>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    public int GetRandomNode(int startIndex)
+    public static Node GetRandomWithSwap(this List<Node> nodes, int startIndex)
     {
         if (nodes.Count == 0)
         {
@@ -70,8 +47,10 @@ public class DetachedNodesList
         {
             Debug.LogError("Not Valid startIndex for detached nodes!");
         }
+
+        
         int rnd = Random.Range(startIndex, nodes.Count);
-        int result = nodes[rnd];
+        Node result = nodes[rnd];
         nodes[rnd] = nodes[startIndex];
         nodes[startIndex] = result;
         return result;

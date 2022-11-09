@@ -1,0 +1,17 @@
+{
+    "name": "aAssemblyWebOfRopes",
+    "rootNamespace": "",
+    "references": [
+        "GUID:569ac694a57e7430b937f95877b6c3be",
+        "GUID:6c46b88af6d2f48789d31084d951923d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
