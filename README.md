@@ -2,6 +2,6 @@
 
 ## Description
 
-It is modified version of the first project at SkyNomadGames.
+It is a modified toy version of the first project at SkyNomadGames.
 
 ## Video
