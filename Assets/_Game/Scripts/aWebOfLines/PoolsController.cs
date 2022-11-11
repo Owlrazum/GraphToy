@@ -87,7 +87,6 @@ public class PoolsController : MonoBehaviour
 
     private void OnReleaseEdge(Edge edge)
     {
-        Debug.Log("OnReleaseEdge");
         edge.gameObject.SetActive(false);
     }
 

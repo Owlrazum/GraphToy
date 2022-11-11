@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 using Orazum.Math;
 
 [RequireComponent(typeof(PoolsController))]
-public class WebOfRopesMaker : MonoBehaviour
+public class EdgeWebMaker : MonoBehaviour
 {
     public static Action<Edge> EventPlayerEnteredEdge;
     [Header("SpawnParams")]
@@ -237,7 +237,6 @@ public class WebOfRopesMaker : MonoBehaviour
 
     private void OnPlayerEnteredEdge(Edge edge)
     {
-        Debug.Log("OnPlayerEnteredEdge");
         _poolsController.ReleaseEdge(edge);
     }
 }
