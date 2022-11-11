@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Orazum.Math;
 
 public class Polyline
@@ -19,8 +15,6 @@ public class Polyline
     public ClockOrderType ClockOrder { get; private set; }
     public bool IsClockOrderValid { get; private set; }
     public int NodeCount { get; private set; }
-
-    public WebOfRopesMaker Maker { get; set; }
 
     public Polyline(Node start, Node end, Edge edge)
     {
@@ -60,6 +54,5 @@ public class Polyline
 
     public void OnPlayerEntered(Edge edge)
     {
-        Maker.OnPlayerEnteredEdge(edge);
     }
 }

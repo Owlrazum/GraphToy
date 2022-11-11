@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b022eb21b9bc54e4fb1a1629cfa9ed0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linePrefab: {fileID: 4562950559045862538, guid: 7def87105979d40d08d9c591685334d2, type: 3}
 --- !u!65 &4230588176700055705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -108,7 +107,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608641073567485823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

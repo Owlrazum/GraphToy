@@ -40,9 +40,11 @@ public class Player : MonoBehaviour
     {
         if (_shouldRespondToJoystick)
         {
-            _movement.UpdateDirection(new Vector3(_joystick.Horizontal, 0, _joystick.Vertical));
+            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+            { 
+                _movement.UpdateDirection(new Vector3(_joystick.Horizontal, 0, _joystick.Vertical));
+                _movement.Move();
+            }
         }
-
-        _movement.Move();
     }
 }

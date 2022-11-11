@@ -42,12 +42,14 @@ public class Edge : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            WebOfRopesMaker.EventPlayerEnteredEdge?.Invoke(this);
             if (_containingPolyline == null)
             {
                 _hasPlayerEntered = true;
                 return;
             }
-            _containingPolyline.OnPlayerEntered(this);
+
+            // _containingPolyline.OnPlayerEntered(this);
         }
     }
 }

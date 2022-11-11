@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using Orazum.Math;
 [RequireComponent(typeof(PoolsController))]
 public class WebOfRopesMaker : MonoBehaviour
 {
+    public static Action<Edge> EventPlayerEnteredEdge;
     [Header("SpawnParams")]
     [Space]
     [SerializeField]
@@ -40,6 +42,13 @@ public class WebOfRopesMaker : MonoBehaviour
 
         _timeFromLastNodeSpawn = 0;
         _timeForNodeSpawn = 1 / _nodeSpawnRate;
+
+        EventPlayerEnteredEdge += OnPlayerEnteredEdge;
+    }
+
+    private void OnDestroy()
+    {
+        EventPlayerEnteredEdge -= OnPlayerEnteredEdge;
     }
 
     private void Start()
@@ -81,7 +90,7 @@ public class WebOfRopesMaker : MonoBehaviour
 
         if (detachedCanditate.IsValid && connectToCanditate.IsValid)
         {
-            float rnd = Random.value;
+            float rnd = UnityEngine.Random.value;
             if (rnd < 0.5f)
             {
                 detachedCanditate.ProcessChoosing(_detachedNodes, _polylines, newEdge);
@@ -111,7 +120,7 @@ public class WebOfRopesMaker : MonoBehaviour
         {
             Node node = _poolsController.GetNode();
 
-            Vector2 pos2d = Random.insideUnitCircle * _radiusOfSpawnArea;
+            Vector2 pos2d = UnityEngine.Random.insideUnitCircle * _radiusOfSpawnArea;
             Vector3 spawnPos = new Vector3(pos2d.x, 0, pos2d.y);
             node.transform.position = spawnPos;
 
@@ -219,15 +228,16 @@ public class WebOfRopesMaker : MonoBehaviour
         {
             Debug.LogError("Not Valid startIndex for detached nodes!");
         }
-        int rnd = Random.Range(startIndex, _polylines.Count);
+        int rnd = UnityEngine.Random.Range(startIndex, _polylines.Count);
         Polyline result = _polylines[rnd];
         _polylines[rnd] = _polylines[startIndex];
         _polylines[startIndex] = result;
         return result;
     }
 
-    public void OnPlayerEnteredEdge(Edge edge)
+    private void OnPlayerEnteredEdge(Edge edge)
     {
+        Debug.Log("OnPlayerEnteredEdge");
         _poolsController.ReleaseEdge(edge);
     }
 }
